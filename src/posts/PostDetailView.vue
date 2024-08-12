@@ -40,8 +40,6 @@ const props = defineProps({
 	id: String,
 });
 
-console.log(props.id);
-
 const post = ref({
 	title: null,
 	content: null,
@@ -50,6 +48,7 @@ const post = ref({
 
 const fetchPost = async () => {
 	try {
+		console.log(typeof props.id);
 		const { data } = await getPostById(props.id);
 		setPost(data);
 	} catch (error) {

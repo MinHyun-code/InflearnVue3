@@ -27,46 +27,10 @@
 				></PostItem>
 			</div>
 		</div>
-		<nav class="mt-5" aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item" :class="{ disabled: !(params._page > 1) }">
-					<a
-						class="page-link"
-						href="#"
-						aria-label="Previous"
-						@click.prevent="params._page -= 1"
-					>
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				</li>
-				<li
-					v-for="page in pageCount"
-					:key="page"
-					class="page-item"
-					:class="{ active: params._page === page }"
-				>
-					<a class="page-link" href="#" @click.prevent="params._page = page">{{
-						page
-					}}</a>
-				</li>
-				<li
-					class="page-item"
-					:class="{ disabled: !(params._page < pageCount) }"
-				>
-					<a
-						class="page-link"
-						href="#"
-						aria-label="Next"
-						@click.prevent="params._page += 1"
-					>
-						<span aria-hidden="true">&raquo;</span>
-					</a>
-				</li>
-			</ul>
-		</nav>
+
 		<hr class="my-5" />
 		<AppCard>
-			<PostDetailView :id="1"></PostDetailView>
+			<PostDetailView id="1"></PostDetailView>
 		</AppCard>
 	</div>
 </template>
