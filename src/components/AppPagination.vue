@@ -1,12 +1,12 @@
 <template>
 	<nav class="mt-5" aria-label="Page navigation example">
 		<ul class="pagination justify-content-center">
-			<li class="page-item" :class="{ disabled: !(currentPage > 1) }">
+			<li class="page-item" :class="isPrevPage">
 				<a
 					class="page-link"
 					href="#"
 					aria-label="Previous"
-					@click.prevent="--currentPage"
+					@click.prevent="$emit('page', currentPage - 1)"
 				>
 					<span aria-hidden="true">&laquo;</span>
 				</a>
@@ -17,16 +17,16 @@
 				class="page-item"
 				:class="{ active: currentPage === page }"
 			>
-				<a class="page-link" href="#" @click.prevent="currentPage = page">{{
+				<a class="page-link" href="#" @click.prevent="$emit('page', page)">{{
 					page
 				}}</a>
 			</li>
-			<li class="page-item" :class="{ disabled: !(currentPage < pageCount) }">
+			<li class="page-item" :class="isNextPage">
 				<a
 					class="page-link"
 					href="#"
 					aria-label="Next"
-					@click.prevent="currentPage += 1"
+					@click.prevent="$emit('page', currentPage + 1)"
 				>
 					<span aria-hidden="true">&raquo;</span>
 				</a>
@@ -36,16 +36,25 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
 	currentPage: {
 		type: Number,
 		required: true,
 	},
-	pagecount: {
+	pageCount: {
 		type: Number,
 		required: true,
 	},
 });
+
+defineEmits(['page']);
+
+const isPrevPage = computed(() => ({ disabled: !(props.currentPage > 1) }));
+const isNextPage = computed(() => ({
+	disabled: !(props.currentPage < props.pageCount),
+}));
 </script>
 
 <style lang="scss" scoped></style>

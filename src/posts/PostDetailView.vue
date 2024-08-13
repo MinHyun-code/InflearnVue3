@@ -37,7 +37,7 @@ import { ref } from 'vue';
 const router = useRouter();
 
 const props = defineProps({
-	id: String,
+	id: [String, Number],
 });
 
 const post = ref({
@@ -48,7 +48,6 @@ const post = ref({
 
 const fetchPost = async () => {
 	try {
-		console.log(typeof props.id);
 		const { data } = await getPostById(props.id);
 		setPost(data);
 	} catch (error) {

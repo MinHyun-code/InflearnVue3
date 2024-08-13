@@ -37,6 +37,7 @@ const save = () => {
 			...form.value,
 			createdAt: Date.now(),
 		});
+		router.push({ name: 'PostList' });
 	} catch (error) {
 		console.log(error);
 	}
